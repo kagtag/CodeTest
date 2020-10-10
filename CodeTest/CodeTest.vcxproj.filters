@@ -26,5 +26,8 @@
     <ClInclude Include="MaxSumSubArray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MinSizeSubArraySum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
