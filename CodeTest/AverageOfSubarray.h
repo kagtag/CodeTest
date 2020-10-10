@@ -18,9 +18,10 @@ class AverageOfSubArrayOfSizeK
 public:
 	static vector<double> findAverages(int K, const vector<int>& arr)
 	{
-		vector<double> result;
+		vector<double> result(arr.size() - K + 1);
 		for (int i = 0; i <= arr.size() - K; ++i)
 		{
+			// the sum of K elements
 			double sum = 0.0;
 
 			for (int j = i; j < i + K; ++j)
@@ -28,8 +29,7 @@ public:
 				sum += arr[j];
 			}
 
-			sum /= K;
-			result.push_back(sum);
+			result[i] = sum / K; // calculate average
 		}
 
 		return result;
@@ -41,6 +41,7 @@ public:
 		int K = 5;
 		vector<double> subarryAverages = AverageOfSubArrayOfSizeK::findAverages(K, input);
 
+		cout << "Average of subarrays of size K :" << endl;
 		for (auto& a : subarryAverages)
 		{
 			cout << a << " ";
