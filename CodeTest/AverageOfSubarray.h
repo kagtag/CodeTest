@@ -19,17 +19,26 @@ public:
 	static vector<double> findAverages(int K, const vector<int>& arr)
 	{
 		vector<double> result(arr.size() - K + 1);
-		for (int i = 0; i <= arr.size() - K; ++i)
+
+		// Compute sum for the first sliding window
+		for (int i = 0; i < K; ++i)
 		{
-			// the sum of K elements
-			double sum = 0.0;
+			result[0] += arr[i];
+		}
 
-			for (int j = i; j < i + K; ++j)
-			{
-				sum += arr[j];
-			}
+		// Compute sum for each sliding window
+		for (int i = 1; i <= arr.size() - K; ++i)
+		{
+			result[i] = result[i - 1];
 
-			result[i] = sum / K; // calculate average
+			result[i] -= arr[i - 1];
+			result[i] += arr[i + K - 1];
+		}
+
+		// Compute average
+		for (int i = 0; i < result.size(); ++i)
+		{
+			result[i] /= K;
 		}
 
 		return result;
