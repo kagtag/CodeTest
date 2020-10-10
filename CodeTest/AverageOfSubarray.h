@@ -20,25 +20,20 @@ public:
 	{
 		vector<double> result(arr.size() - K + 1);
 
-		// Compute sum for the first sliding window
-		for (int i = 0; i < K; ++i)
+		double windowSum = 0.0;
+		int windowStart = 0;
+		for (int windowEnd = 0; windowEnd < arr.size(); ++windowEnd)
 		{
-			result[0] += arr[i];
-		}
+			windowSum += arr[windowEnd];			// add the newly included item
 
-		// Compute sum for each sliding window
-		for (int i = 1; i <= arr.size() - K; ++i)
-		{
-			result[i] = result[i - 1];
-
-			result[i] -= arr[i - 1];
-			result[i] += arr[i + K - 1];
-		}
-
-		// Compute average
-		for (int i = 0; i < result.size(); ++i)
-		{
-			result[i] /= K;
+			// Start sliding window 
+			if (windowEnd >= K - 1)
+			{
+				result[windowStart] = windowSum / K; // compute average
+				
+				windowSum -= arr[windowStart];		// subtract the first item (belong to the previous sliding window)
+				windowStart++;						// move to the next sliding window
+			}
 		}
 
 		return result;
