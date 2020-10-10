@@ -26,33 +26,26 @@ public:
 		int startIndex = 0;
 		for (int windowEnd = 0; windowEnd < str.size(); ++windowEnd)
 		{
-			
 			// add 1 more character into the window
-			if (charCount.find(str[windowEnd]) == charCount.end())
-				charCount.emplace(str[windowEnd], 1);
-			else
-				charCount[str[windowEnd]]++;
+			charCount[str[windowEnd]]++;
 
-			if (charCount.size() <= k)
+			// Shrink window until there're no more than k distinct characters in the window
+			while (charCount.size() > k)
 			{
-				// Sub array no more than k distinct characters, update maxLength
-				int windowSize = windowEnd - windowStart + 1;
-				if (windowSize > maxLength)
-				{
-					maxLength = windowSize;
-					startIndex = windowStart;
-				}
+				char leftChar = str[windowStart];
+				charCount[leftChar]--;
+				if (charCount[leftChar] == 0) charCount.erase(leftChar);
+				windowStart++;
 			}
-			else
+			
+			
+			// Sub array no more than k distinct characters, update maxLength
+			int windowSize = windowEnd - windowStart + 1;
+			if (windowSize > maxLength)
 			{
-				// Shrink sliding window size
-				for (; charCount.size() > k /*&& windowStart <= windowEnd*/; ++windowStart)
-				{
-					charCount[str[windowStart]]--;
-					if (charCount[str[windowStart]] == 0) charCount.erase(str[windowStart]);
-				}
+				maxLength = windowSize;
+				startIndex = windowStart;
 			}
-
 		}
 
 		cout << str.substr(startIndex, maxLength) << endl;
