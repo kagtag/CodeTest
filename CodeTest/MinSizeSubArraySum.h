@@ -37,7 +37,7 @@ public:
 			
 			// Check if the window sum >= S, if so, check if the current sliding window size < minCount.
 			// repeatedly removing one element from the front of the window to reduce subarray size.
-			for (; windowSum >= S && windowStart <= windowEnd; ++windowStart)
+			for (; windowSum >= S /*&& windowStart <= windowEnd*/; ++windowStart) // useless when S > 0
 			{
 				int count = windowEnd - windowStart + 1;
 				if (count < minCount)
