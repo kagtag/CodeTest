@@ -7,6 +7,15 @@
 // Given a string, find the length of the longest substring in it with no more than K distinct characters
 
 
+// Fruits into baskets.
+// This problem can also be solved with this algorithm
+// https://www.educative.io/courses/grokking-the-coding-interview/Bn2KLlOR0lQ
+
+// Description
+// Given an array of characters where each character represents a fruit tree, you are given 2 baskets and 
+// your goal is to put maximum number of fruits in each basket. 
+// The only restriction is that each basket can have only one type of fruit
+
 #include <iostream>
 #include <string>
 #include <unordered_map>
@@ -57,12 +66,27 @@ public:
 	{
 		auto test_print = [](int k, const string& str)
 		{
-			cout << "The longest substring with no more than " << k << " distinct characters is " << findLength(str, k) << endl;
-			;
+			cout << "The longest substring with no more than " << k << " distinct characters is " << findLength(str, k) << endl << endl;
 		};
 
 		test_print(2, "araaci");
 		test_print(1, "araaci");
 		test_print(3, "cbbebi");
+
+		
+		auto basket_test_print = [](const vector<char>& chars)
+		{
+			string str;
+			for (auto c : chars)
+			{
+				str += c;
+			}
+
+			cout << " Fruits in baskets " << findLength(str, 2) << endl << endl;
+		};
+
+		basket_test_print({ 'A', 'B', 'C', 'A', 'C' });
+		basket_test_print({ 'A', 'B', 'C', 'B', 'B', 'C' });
+
 	}
 };
