@@ -16,32 +16,39 @@ public:
 		int maxLength = 0;
 		int startIndex = 0;
 
-		unordered_map<char, int> charCount;
+		unordered_map<char, int> lastMetIndex;
 
 		int windowStart = 0;
 		for (int windowEnd = 0; windowEnd < str.size(); ++windowEnd)
 		{
 			char rightChar = str[windowEnd];
-			if (charCount.find(rightChar) != charCount.end())
-			{
-				while (str[windowStart] != rightChar)
-				{
-					charCount.erase(str[windowStart]);
-					windowStart++;
-				}
 
-				windowStart++;
-			}
-			else
+			if (lastMetIndex.find(rightChar) != lastMetIndex.end())
 			{
-				charCount.emplace(rightChar, 1);
-				int count = windowEnd - windowStart + 1;
-				if (count > maxLength)
-				{
-					maxLength = count;
-					startIndex = windowStart;
-				}
+				// e.g.
+				// a b b c d a...
+				// in this case, windowStart at the second b, windowEnd at the second a.
+				// we see that lastMetIndex['a'] + 1 < windowStart.    keep windowStart
+
+				// a b c d a
+				// in this case, windowStart at first a, windowEnd at the second a.
+				// we see that lastMetIndex['a'] + 1 > windowStart     update windowStart
+
+				windowStart = max(windowStart, lastMetIndex[rightChar] + 1);
+
 			}
+			
+			// Update last met index
+			lastMetIndex[rightChar] = windowEnd;
+
+			// check current window size
+			int count = windowEnd - windowStart + 1;
+			if (count > maxLength)
+			{
+				maxLength = count;
+				startIndex = windowStart;
+			}
+			
 		}
 
 		cout << str.substr(startIndex, maxLength) << endl;
