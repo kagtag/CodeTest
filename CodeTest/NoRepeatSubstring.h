@@ -16,14 +16,16 @@ public:
 		int maxLength = 0;
 		int startIndex = 0;
 
-		unordered_map<char, int> lastMetIndex;
+		// assuming str only contains lower case letters.
+		int lastMetIndex[26] = {};
+		memset(lastMetIndex, -1, 26);
 
 		int windowStart = 0;
 		for (int windowEnd = 0; windowEnd < str.size(); ++windowEnd)
 		{
-			char rightChar = str[windowEnd];
+			char rightCharID = str[windowEnd] - 'a';
 
-			if (lastMetIndex.find(rightChar) != lastMetIndex.end())
+			if(lastMetIndex[rightCharID] != -1)
 			{
 				// e.g.
 				// a b b c d a...
@@ -34,12 +36,12 @@ public:
 				// in this case, windowStart at first a, windowEnd at the second a.
 				// we see that lastMetIndex['a'] + 1 > windowStart     update windowStart
 
-				windowStart = max(windowStart, lastMetIndex[rightChar] + 1);
+				windowStart = max(windowStart, lastMetIndex[rightCharID] + 1);
 
 			}
 			
 			// Update last met index
-			lastMetIndex[rightChar] = windowEnd;
+			lastMetIndex[rightCharID] = windowEnd;
 
 			// check current window size
 			int count = windowEnd - windowStart + 1;
