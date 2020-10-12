@@ -26,11 +26,17 @@ public:
 				onesCount++;
 				startIndex = windowStart;
 			}
-			else
+			//else
 			{
-				// Shrink the window until no more than k 0s need to be replaced 
-				// to get all 1s in the window
-				while(windowEnd - windowStart + 1 - onesCount > k)
+				// provided version, the result will be correct, but some intermediate state
+				// would be incorrect.
+				// e.g. k = 2
+				// 0 1 1 0 0 0 1
+				// after sliding window reach 1 1 0 0,
+				// next iteration would yield a sliding window 1 0 0 0. note here we have 
+				// 3 0s. 
+
+				/*while*/if(windowEnd - windowStart + 1 - onesCount > k)
 				{
 					if (arr[windowStart] == 1)
 						onesCount--;
