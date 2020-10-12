@@ -149,6 +149,7 @@
     <ClInclude Include="MinSizeSubArraySum.h" />
     <ClInclude Include="NoRepeatSubstring.h" />
     <ClInclude Include="PCH.h" />
+    <ClInclude Include="PermutationInAString.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

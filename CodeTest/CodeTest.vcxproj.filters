@@ -44,5 +44,8 @@
     <ClInclude Include="LongestSubstrOnesReplacement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PermutationInAString.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
