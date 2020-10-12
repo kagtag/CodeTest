@@ -143,6 +143,7 @@
   <ItemGroup>
     <ClInclude Include="AverageOfSubarray.h" />
     <ClInclude Include="LongestSubStrKDistinct.h" />
+    <ClInclude Include="LongestSubstrOnesReplacement.h" />
     <ClInclude Include="LongestSubstrReplacement.h" />
     <ClInclude Include="MaxSumSubArray.h" />
     <ClInclude Include="MinSizeSubArraySum.h" />
