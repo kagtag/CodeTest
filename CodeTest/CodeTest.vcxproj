@@ -147,6 +147,7 @@
     <ClInclude Include="LongestSubstrReplacement.h" />
     <ClInclude Include="MaxSumSubArray.h" />
     <ClInclude Include="MinSizeSubArraySum.h" />
+    <ClInclude Include="MinWindowSubstring.h" />
     <ClInclude Include="NoRepeatSubstring.h" />
     <ClInclude Include="PCH.h" />
     <ClInclude Include="PermutationInAString.h" />

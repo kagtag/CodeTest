@@ -50,5 +50,8 @@
     <ClInclude Include="StringAnagrams.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MinWindowSubstring.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
