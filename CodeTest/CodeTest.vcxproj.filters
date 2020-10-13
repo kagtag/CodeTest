@@ -47,5 +47,8 @@
     <ClInclude Include="PermutationInAString.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="StringAnagrams.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
