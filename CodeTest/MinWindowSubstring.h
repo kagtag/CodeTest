@@ -7,6 +7,12 @@
 // Given a string and a pattern, find the smallest substring in the given string which has 
 // all the characters of the given pattern.
 
+// My version, removes duplicated characters in pattern.   Does a character in pattern appears in substring?
+// Provided version, still considers the frequency of the character in pattern,  just like Permutation in a String
+// e.g., pattern "aabc"  , string "abc"
+// it would output "abc" in my version, since the pattern would be recognized as "abc",
+// while output "" in provided version, since there's not enough 'a's.
+
 #include "PCH.h"
 
 class MinimumWindowSubstring
@@ -18,8 +24,7 @@ public:
 
 		for (auto c : pattern)
 		{
-			//  only 1 character for each type is needed
-			charFrequencyMap[c] = 1;
+			charFrequencyMap[c]++;
 		}
 
 		int matched = 0;
@@ -34,7 +39,7 @@ public:
 			if (charFrequencyMap.find(rightChar) != charFrequencyMap.end())
 			{
 				charFrequencyMap[rightChar]--;
-				if (charFrequencyMap[rightChar] == 0)
+				if (charFrequencyMap[rightChar] >= 0)
 				{
 					matched++;
 				}
@@ -43,7 +48,7 @@ public:
 
 			// When found a matched substring, shrink the window as
 			// much as we can to see if there's a smaller matched substring.
-			while (matched == charFrequencyMap.size())
+			while (matched == pattern.size())
 			{
 				int curSize = windowEnd - windowStart + 1;
 				if (minSize > curSize)
