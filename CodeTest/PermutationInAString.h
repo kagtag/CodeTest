@@ -20,67 +20,47 @@ class StringPermutation
 public:
 	static bool findPermutation(const string& str, const string& pattern)
 	{
-		unordered_map<char, int> pattMap, countMap;
+		unordered_map<char, int> charFrequencyMap;
 		
 		int windowStart = 0;
+
+		int matched = 0;
 
 		// pattern maps recording pattern characters and their count.
 		for (auto c : pattern)
 		{
-			pattMap[c]++;
+			charFrequencyMap[c]++;
 		}
 
 		for (int windowEnd = 0; windowEnd < str.size(); ++windowEnd)
 		{
+			// Include 1 more character
 			char rightChar = str[windowEnd];
-
-			while (pattMap.find(rightChar) == pattMap.end() && windowEnd < str.size())
+			if (charFrequencyMap.find(rightChar) != charFrequencyMap.end())
 			{
-				// character not in pattern, skip to the next character.
-				// and clear all records.
-				windowStart = windowEnd = windowEnd + 1;
-				countMap.clear();
-
-				// since windowEnd changed, update rightChar
-				rightChar = str[windowEnd];
+				charFrequencyMap[rightChar]--;
+				if (charFrequencyMap[rightChar] == 0)
+					matched++;
 			}
-			
-			if(countMap[rightChar] == pattMap[rightChar])
-			{
-				// More rightChar than needed. Shrink the window until we
-				// remove 1 rightChar from window.
-				while (str[windowStart] != rightChar)
-				{
-					char leftChar = str[windowStart];
-					countMap[leftChar]--;
-					windowStart++;
-				}
 
+			// Shrink window to ensure window size <= pattern size
+			if (windowEnd > (pattern.size() - 1))  
+			{
+				char leftChar = str[windowStart];
+				if (charFrequencyMap.find(leftChar) != charFrequencyMap.end())
+				{
+					if (charFrequencyMap[leftChar] == 0)
+						matched--;
+					charFrequencyMap[leftChar]++;
+				}
 				windowStart++;
-				countMap[rightChar]--;
 			}
 
-			countMap[rightChar]++;
-			if (countMap[rightChar] == pattMap[rightChar])
+			// Check if there's a permutation achieved.
+			if (matched == charFrequencyMap.size())
 			{
-				// Check if there's a permutation achieved.
-				bool bFinished= true;
-				for (auto& item : pattMap)
-				{
-					auto c = item.first;
-					if (countMap[c] != pattMap[c])
-					{
-						// Still missing some characters 
-						bFinished = false;
-						break;
-					}
-				}
-
-				if (bFinished)
-				{
-					cout << "Found permutation: " << str.substr(windowStart, windowEnd - windowStart + 1) << endl;
-					return true;
-				}
+				cout << "Found permutation: " << str.substr(windowStart, windowEnd - windowStart + 1) << endl;
+				return true;
 			}
 		}
 
