@@ -8,7 +8,9 @@
 // all the characters of the given pattern.
 
 // My version, removes duplicated characters in pattern.   Does a character in pattern appears in substring?
+
 // Provided version, still considers the frequency of the character in pattern,  just like Permutation in a String
+
 // e.g., pattern "aabc"  , string "abc"
 // it would output "abc" in my version, since the pattern would be recognized as "abc",
 // while output "" in provided version, since there's not enough 'a's.
