@@ -59,5 +59,8 @@
     <ClInclude Include="PairWithTargetSum.h">
       <Filter>Two Pointers</Filter>
     </ClInclude>
+    <ClInclude Include="RemoveDuplicates.h">
+      <Filter>Two Pointers</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
