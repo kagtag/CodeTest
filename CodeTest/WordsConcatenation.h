@@ -17,76 +17,42 @@ public:
 	{
 		vector<int> resultIndices;
 
-		int windowStart = 0;
-
-		int wordLength = words[0].size();
-		int windowLength = wordLength * words.size();
-
-		unordered_map<string, int> originalMap;
 		unordered_map<string, int> wordFrequencyMap;
-
-		int matched = 0;
-
-		for (auto& w : words)
+		for (auto word : words)
 		{
-			originalMap[w]++;
+			wordFrequencyMap[word]++;
 		}
 
-		wordFrequencyMap = originalMap;
+		int wordCount = words.size(), wordLength = words[0].size();
 
-		for (int windowEnd = 0; windowEnd < str.size(); )
+		for (int i = 0; i <= str.size() - wordCount * wordLength; ++i)
 		{
-			string rightWord = str.substr(windowEnd, wordLength);
-
-
-			if(wordFrequencyMap.find(rightWord) == wordFrequencyMap.end())
+			unordered_map<string, int> wordSeen;
+			for (int j = 0; j < wordCount; ++j)
 			{
-				// no matched word
+				string word = str.substr(i + j * wordLength, wordLength);
 
-				// reset the window
-				windowStart++;
+				// word not included in pattern
+				if (wordFrequencyMap.find(word) == wordFrequencyMap.end())
+					break;
 
-				windowEnd = windowStart;
+				wordSeen[word]++;
 
-				// reset all
-				matched = 0;
-				wordFrequencyMap = originalMap;
-				continue;
-			}
-			else
-			{
-				wordFrequencyMap[rightWord]--;
-				if (wordFrequencyMap[rightWord] >= 0)
-					matched++;
+				// more words than needed
+				if (wordSeen[word] > wordFrequencyMap[word])
+					break;
 
-				windowEnd += wordLength;
-			}
-
-			// Shrink the window
-			while(windowEnd - windowStart > windowLength)
-			{
-				string leftWord = str.substr(windowStart, wordLength);
-				
-				if (wordFrequencyMap.find(leftWord) != wordFrequencyMap.end())
+				if (j + 1 == wordCount)
 				{
-					if (wordFrequencyMap[leftWord] == 0)
-						matched--;
-					wordFrequencyMap[leftWord]++;
+					resultIndices.push_back(i);
 				}
-				
-				//windowStart++;     // ???
-				windowStart += wordLength;
-			}
-
-			if (matched == words.size())
-			{
-				resultIndices.push_back(windowStart);
 			}
 		}
+
 
 		for (auto& i : resultIndices)
 		{
-			cout << "* " << i << " " << str.substr(i, windowLength) << " ";
+			cout << "* " << i << " " << str.substr(i, wordLength*wordCount) << " ";
 		}
 		cout << endl;
 
