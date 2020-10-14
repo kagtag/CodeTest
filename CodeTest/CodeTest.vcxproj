@@ -149,6 +149,7 @@
     <ClInclude Include="MinSizeSubArraySum.h" />
     <ClInclude Include="MinWindowSubstring.h" />
     <ClInclude Include="NoRepeatSubstring.h" />
+    <ClInclude Include="PairWithTargetSum.h" />
     <ClInclude Include="PCH.h" />
     <ClInclude Include="PermutationInAString.h" />
     <ClInclude Include="StringAnagrams.h" />
