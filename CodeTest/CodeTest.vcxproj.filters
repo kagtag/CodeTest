@@ -53,5 +53,8 @@
     <ClInclude Include="MinWindowSubstring.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="WordsConcatenation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
