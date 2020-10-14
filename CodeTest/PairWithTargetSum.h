@@ -12,29 +12,21 @@ class PairWithTargetSum
 public:
 	static pair<int, int> search(const vector<int>& arr, int targetSum)
 	{
-		// Get 2 pointers, pointing to the start and end of the array respectively.
-		int startIndex = 0, endIndex = arr.size() - 1;
-
 		auto result = make_pair(-1, -1);
 
-		while (startIndex < endIndex)
+		unordered_map<int, int> numberIndexMap;
+
+		for (int i = 0; i < arr.size(); ++i)
 		{
-			int sum = arr[startIndex] + arr[endIndex];
-
-			if (sum == targetSum)
+			int y = targetSum - arr[i];
+			if (numberIndexMap.find(y) == numberIndexMap.end())
 			{
-				result = make_pair(startIndex, endIndex);
-				break;
-				//return make_pair(startIndex, endIndex);
-			}
-
-			if (sum > targetSum)
-			{
-				--endIndex;
+				numberIndexMap[arr[i]] = i;
 			}
 			else
 			{
-				++startIndex;
+				result = make_pair(numberIndexMap[y], i);
+				break;
 			}
 		}
 
