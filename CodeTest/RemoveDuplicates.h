@@ -13,53 +13,27 @@ class RemoveDuplicates
 public:
 	static int remove(vector<int>& arr)
 	{
-		int uniqueCount = 0;
+		int nextNonDuplicate = 1; 
 
-		int fastIndex = 1, slowIndex = 0;
-
-		// initial step
-		if (arr.size() >= 1)
+		for (int i = 1; i < arr.size(); ++i)
 		{
-			uniqueCount++;
-		}
-
-		while (fastIndex < arr.size())
-		{
-			if (arr[slowIndex] != arr[fastIndex])
+			if (arr[i] != arr[nextNonDuplicate -1])
 			{
-				uniqueCount++;
-
-				if (fastIndex > slowIndex + 1)
-				{
-					// move elements forward
-					for (int i = 0; i < arr.size() - fastIndex; ++i)
-					{
-						arr[slowIndex + i + 1] = arr[fastIndex + i];
-					}
-
-					// remove useless trailing items.
-					arr.erase(arr.end() - (fastIndex - slowIndex - 1), arr.end());
-				}
-
-				slowIndex++;
-
-				fastIndex = slowIndex;
+				arr[nextNonDuplicate] = arr[i];
+				nextNonDuplicate++;
 			}
-			
-			fastIndex++;
 		}
 
-		// remove duplicate items in tail
-		arr.erase(arr.begin() + uniqueCount, arr.end());
+		arr.erase(arr.begin() + nextNonDuplicate, arr.end());
 
-		cout << "Length of array after dedup: " << uniqueCount << endl;
+		cout << "Length of array after dedup: " << nextNonDuplicate << endl;
 		for (auto& item : arr)
 		{
 			cout << item << " ";
 		}
 		cout << endl;
 
-		return uniqueCount;
+		return nextNonDuplicate;
 	}
 
 	static void test()
