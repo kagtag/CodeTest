@@ -153,6 +153,7 @@
     <ClInclude Include="PCH.h" />
     <ClInclude Include="PermutationInAString.h" />
     <ClInclude Include="RemoveDuplicates.h" />
+    <ClInclude Include="SortedArraySquares.h" />
     <ClInclude Include="StringAnagrams.h" />
     <ClInclude Include="WordsConcatenation.h" />
   </ItemGroup>

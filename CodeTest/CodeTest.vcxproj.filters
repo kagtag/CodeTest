@@ -62,5 +62,8 @@
     <ClInclude Include="RemoveDuplicates.h">
       <Filter>Two Pointers</Filter>
     </ClInclude>
+    <ClInclude Include="SortedArraySquares.h">
+      <Filter>Two Pointers</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
