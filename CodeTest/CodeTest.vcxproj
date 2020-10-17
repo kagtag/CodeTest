@@ -155,6 +155,7 @@
     <ClInclude Include="RemoveDuplicates.h" />
     <ClInclude Include="SortedArraySquares.h" />
     <ClInclude Include="StringAnagrams.h" />
+    <ClInclude Include="TripletSumToZero.h" />
     <ClInclude Include="WordsConcatenation.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
